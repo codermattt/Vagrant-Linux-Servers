@@ -1,0 +1,24 @@
+Commands for a manual finance website setup
+Notes: 
+     - the Vagrantfile was already created off a centos-stream-9 box
+     - Both the private and public networks were uncommented in the Vagrant file
+     - the vb.memory line was also uncommented to have 1024 mb of memory
+
+- cd /C/vagrant-vms/finance
+- vagrant up
+- sudo -i   (make sure root user)
+- yum install httpd wget vim unzip zip -y
+- systemctl start httpd
+- systemctl enable httpd
+- ip addr show     (get private ip address to check if httpd service is running)
+
+# website setup
+  - we used tooplate.com to get html skeletons to copy to /var/www/html
+
+- cd /tmp
+- wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip
+- unzip -o 2135_mini_finance.zip 
+- cp -r 2135_mini_finance/* /var/www/html
+- systemctl restart httpd
+- cd
+- systemctl status firewalld  # Should show 'dead' (ports open)
